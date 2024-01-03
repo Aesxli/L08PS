@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://unpkg.com/fullpage.js/dist/fullpage.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>About Me</title>
+    <style>
+        #section2 .social-icon {
+            text-align: center;
+            padding-top: 1.25rem;
+        }
+
+        #section2 .social-icon a {
+            display: inline-block;
+            color: #1560bd;
+            border: 0.125rem solid #1560bd;
+            font-size: 3rem;
+            width: 4.1875rem;
+            height: 4.1875rem;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 4.1875rem;
+            transition: 0.4s;
+            opacity: 0;
+            margin: 5rem;
+        }
+
+        #section2 .social-icon a:hover {
+            background-color: #1560bd;
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="fullpage">
+        <div class="section" id="section1">
+            <h1 id="aboutSection" style="text-align: center;background-color: grey;">About Me</h1>
+            <img src="pic/image.jpeg" id="profileImage" style="width:20%; height:60%; display: block; margin: auto;" />
+            <div class="about">
+                <h3 id="myName" style="text-align: center;">Alex Poh</h3>
+                <p id="description"style="text-align: center;">
+                    Hi, I am Alex, a UI/UX designer, and a web developer currently studying in Republic Polytechnic year
+                    2. </br>My course is digital design and development, which teaches us about the front end and back end of
+                    websites and apps.
+                </p>
+                <p id="age"style="text-align: center;">18</p>
+            </div>
+        </div>
+
+        <div class="section" id="section2">
+            <h1 id="SM" style="color: #FFFFFF; text-align: center; opacity: 0;">Social Media</h1>
+            <div class="social-icon">
+                <a href="https://github.com/Aesxli"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/alex-poh-b62511277/"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+            <h1 id="HP" style="color: #FFFFFF; text-align: center; opacity: 0;">HP:8571 3136</h1>
+            <h1 id="HP" style="color: #FFFFFF; text-align: center; opacity: 0;">Email:alexpoh642@yahoo.com.sg</h1>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://unpkg.com/fullpage.js/dist/fullpage.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#fullpage").fullpage({
+                sectionsColor: ["#f0faff", "#0a0600"],
+                navigation: true,
+                navigationPosition: "right",
+                afterLoad: function (origin, destination, direction) {
+                    if (destination.index === 0) {
+                        animateSection1();
+                    } else if (destination.index === 1) {
+                        // Delay the animation until after the section has fully loaded
+                        setTimeout(function () {
+                            animateSection2();
+                        }, 100); // Adjust the delay as needed
+                    }
+                },
+            });
+        });
+
+        function animateSection1() {
+            const nameAnimation = anime({
+                targets: "#myName",
+                translateX: [-300, 0],
+                opacity: [0, 1],
+                easing: "easeInOutQuad",
+                duration: 1500,
+            });
+
+            const imageAnimation = anime({
+                targets: "#profileImage",
+                translateY: [-300, 0],
+                opacity: [0, 1],
+                easing: "easeInOutExpo",
+
+                duration: 1500,
+            });
+
+            const aboutAnimation = anime({
+                targets: "#aboutSection",
+                translateY: [300, 0],
+                opacity: [0, 1],
+                easing: "easeInOutQuad",
+                duration: 1500,
+            });
+
+            const descriptionAnimation = anime({
+                targets: "#description",
+                opacity: [0, 1],
+                easing: "easeInOutQuad",
+                duration: 1500,
+                delay: anime.stagger(300, { start: 1000 }),
+            });
+            const age = anime({
+                targets: "#age",
+                round: 1,
+                opacity: [0, 1],
+                innerHTML: [0, 18],
+                easing: "easeInOutQuad",
+                duration: 1500,
+            });
+
+            function restartAnimations() {
+                nameAnimation.restart();
+                imageAnimation.restart();
+                aboutAnimation.restart();
+                descriptionAnimation.restart();
+            }
+
+            document.addEventListener("click", restartAnimations);
+
+            anime({
+                targets: ".section",
+                translateY: [100, 0],
+                opacity: [0, 1],
+                easing: "easeInOutQuad",
+                duration: 1500,
+                delay: anime.stagger(200),
+            });
+        }
+
+        function animateSection2() {
+            const socialMediaAnimation = anime({
+                targets: "#SM",
+                opacity: [0, 1],
+                easing: "easeInOutQuad",
+                duration: 1500,
+            });
+
+            const socialIconAnimation = anime({
+                targets: ".social-icon a",
+                opacity: [0, 1],
+                easing: "easeInOutQuad",
+                duration: 1500,
+                delay: anime.stagger(200),
+            });
+
+            const hpAnimation = anime({
+                targets: "#HP",
+                opacity: [0, 1],
+                easing: "easeInOutQuad",
+                duration: 1500,
+                delay: 400,
+            });
+        }
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
